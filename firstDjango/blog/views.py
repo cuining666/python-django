@@ -28,3 +28,11 @@ def userPage(request):
     # 获取数据列表
     user_list = models.UserInfo.objects.all()
     return render(request, "userPage.html", {"user_list": user_list})
+
+
+def noNameParams(request, arg1, arg2):
+    return HttpResponse("id:" + arg1 + ", name:" + arg2)
+
+
+def nameParams(request, name, id):
+    return HttpResponse("id:" + id + ", name:" + name)
