@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 import datetime
 from blog import models
 
@@ -34,5 +34,20 @@ def noNameParams(request, arg1, arg2):
     return HttpResponse("id:" + arg1 + ", name:" + arg2)
 
 
-def nameParams(request, name, id):
+def nameParams1(request, name, id):
     return HttpResponse("id:" + id + ", name:" + name)
+
+
+def nameParams2(request, name):
+    return HttpResponse("name:" + name)
+
+
+def loginPage(request):
+    if request.method == 'POST':
+        username = request.POST.get("username")
+        pwd = request.POST.get("password")
+        if username == 'admin' and pwd == 'admin':
+            return HttpResponse("login success")
+        else:
+            return redirect("/blog/login")
+    return render(request, "login.html")
